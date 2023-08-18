@@ -1,13 +1,1 @@
-hola mundo desde la consola de alejos
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-holaaaa
-=======
-esta linea es de Marcelo
->>>>>>> dbb6b7abf64d5f38d050250a0036f30449a3aa6e
-=======
-mariano !!!
-
-hola hola desde mariano !!!
->>>>>>> 09715dd933143ad52a8cde7d0c1ef39e49ce8a92
+hola mundo desde la consola de alejo
