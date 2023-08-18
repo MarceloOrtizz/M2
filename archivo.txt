@@ -2,7 +2,8 @@ hola mundo desde la consola de Alejo, y tambien Marcelo
 
 esto es una nueva prueba esto en la linea 3
 
-hola mundo desde la consola de Marcelo
+hola mundo desde la consola Alejo otra vez jejejej
+
 sin hacer pull se rompe todo
 
 una mejora y quiero agregar algo mas otro cambiao que hice
