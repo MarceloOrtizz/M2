@@ -8,3 +8,7 @@ aca no habia nada
 sin hacer pull se rompe todo
 esto lo hice mal
 una mejora y quiero agregar algo mas otro cambiao que hice
+
+Hola Mundo de manera local en la consola de Javier, es para hacer un pull request, es decir, solicitar una extracción
+que el creador del repositorio puede aceptar o rechazar para incluir en el documento.
+Los cambios se hicieron desde el fork del repositorio del usuario de github xaviac
