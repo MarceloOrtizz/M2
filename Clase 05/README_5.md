@@ -1,220 +1,225 @@
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
-# Tests Estadísticos
+## Introducción a sistemas de gestión de bases de datos
 
-["Estadística para administración y economía" - Capítulo 9](https://github.com/soyHenry/DS-M2/blob/main/Anderson.pdf)
+En este módulo aprenderás como es el proceso mediante el cual se generan las estructuras que forman parte de las bases de datos. Un dato es "una representación simbólica de un objeto o hecho de la realidad".
+Teniendo esto presente, resulta claro que para poder crear una base de datos, primero deberás representar en un modelo aquello que va a persistir en ella.
 
-Por lo general, en la práctica, se tienen que tomar decisiones sobre poblaciones, partiendo de la información muestral de las mismas. Tales decisiones se llaman, decisiones estadísticas.<br>
-Para tomar decisiones conviene hacer determinados supuestos y tales supuestos son formulados respecto del valor de algún parámetro, que pueden ser o no ciertos. A estos los denominamos Hipótesis Estadísticas y, en general, lo son sobre las distribuciones de probabilidad de las poblaciones.<br>
-En el procedimiento de test estadísticos, se utilizan las denominadas pruebas de hipótesis y en ellas se usan datos de una muestra para probar dos afirmaciones contrarias indicadas por H0 (hipótesis nula) y Ha (la hipótesis alternativa).<br>
+"Modelamos la realidad para poder describirla a través de los datos que la representan".
 
-Suponga que las notas promedios de un Henry Challenge es de 78, Henry determina que a través de métodos innovadores puede aumentar esa media. En este caso, se establece un grupo de investigación que busca evidencias para concluir que el nuevo sistema aumenta la media del rendimiento. La hipótesis de investigación es, entonces, que el nuevo sistema proporciona un rendimiento medio mayor; es decir, μ > 78. Como lineamiento general, una hipótesis de investigación se debe plantear como hipótesis alternativa. Por tanto, en este estudio las hipótesis nula y alternativa adecuadas son "H0: μ<= 78" y "H1: μ> 78".<br>
+### Modelos relacionales - Modelo Entidad - Relación
 
-Si los resultados obtenidos con la muestra indican que no se puede rechazar H0, el grupo no concluirán que el nuevo sistema sea mejor. Quizá será necesario continuar investigando y realizar nuevas pruebas. Pero si los resultados muestrales indican que se
-puede rechazar H0, inferirán que Ha: μ > 78 es verdadera. Esta conclusión proporciona el apoyo estadístico necesario para afirmar que el nuevo sistema aumenta el rendimiento. Se considerará la implementación del nuevo sistema.<br>
-En estudios de investigación como éste, las hipótesis nula y alternativa deben formularse de manera que al rechazar H0 se apoye la conclusión de la investigación. La hipótesis de la investigación, entonces, debe expresarse como hipótesis alternativa.<br>
-Cuando lo que realizamos es una afirmación, en este caso sería que quienes rinden un HC obtienen por lo menos 78 puntos en promedio, la "H0: μ>= 78" y "H1: μ< 78". Es decir que en toda situación en la que se desee probar la validez de una afirmación, la hipótesis nula se suele basar en la suposición de que la afirmación sea verdadera. Entonces, la hipótesis alternativa se formula de manera que rechazar H0 proporcione la evidencia estadística de que la suposición establecida es incorrecta.<br>
+**Modelos de negocios:**
 
-Existen además otras formas de realizar el planteo de H0 y H1, como cuando se debe tomar una decisión. Como por ejemplo controlar la calidad de un determinado respuesto en donde debe medir obligatoriamente 10 cm. "H0: μ= 10" y "H1: μ!= 10". Lo que determina solo dos alternativas.
+El modelado de datos es el proceso mediante el cual se definen los requisitos de negocio y se diseñan las mejores estructuras de datos para soportarlos.
+El modelo de datos es el equivalente al plano de un edificio, y representa de forma conceptual aquello que se pretende diseñar. Durante cada etapa de madurez de datos que atraviesa una empresa, pueden existir distintos modelos que describan la realidad del negocio. En este módulo en particular nos centraremos en los inicios de un proyecto de tecnología, en el cual se debe definir la estructura de la base de datos de una aplicación (como concepto amplio que incluye tanto apps móviles, web, ect.).
 
-![test](/_src/assets/hipotesis.PNG)
+**Bases de datos:**
 
-METODOLOGÍA DE LA PRUEBA DE HIPÓTESIS: DEFINICIÓN DE ETAPAS
+Una base de datos “es una colección de datos almacenados de forma coherente y permanente”, estos datos provienen de entidades, objetos o hechos de la realidad, por lo que una de las primeras tareas al crear una base de datos tal como ya lo mencionamos, será definirlos y modelarlos.<br>
+Para poder modelar la realidad y traducirla en una estructura coherente, uno de los modelos más utilizados, es el modelo relacional, basado principalmente en el modelo ENTIDAD-RELACIÓN. La información necesaria para su construcción se basa en el relevamiento del modelo de negocios de la organización a través de entidades, atributos y relaciones.<br>
+La interacción de estas entidades en la realidad con los atributos que las describen, determinan las “relaciones” que se darán en la base de datos.
+Una entidad es un "objeto" de la realidad que se puede describir a través de sus "atributos", a su vez cada entidad interactúa con otras entidades, lo que se denomina "relación". Cabe destacar que tanto las entidades como sus relaciones se definen a partir del grado de relevancia que tienen para el negocio que se esta modelando, y de ellos surgen los registros que luego van a persistir en la base de datos.<br>
+Si pensamos en una Edtech, un "Alumno" es una entidad relevante que se puede describir mediante atributos tales como su nombre, apellido, fecha de nacimiento, fecha de ingreso, carrera que cursa, ect. Otra entidad importante es la del "Instructor" que también puede describirse por su nombre, apellido, fecha de nacimiento, fecha de incorporación, carrera que dicta, ect. Otros atributos tales como estatura, talle de calzado u otras, no serían importantes en este modelo.
 
-1. Formular la hipótesis nula.<br>
-2. Formular la hipótesis alternativa.<br>
-3. Especificar el nivel de significación.<br>
-4. Determinar el tamaño de la muestra.<br>
-5. Determinar el estadístico de prueba.<br>
-6. Establecer los valores críticos que dividen las zonas de rechazo y de no rechazo.<br>
-7. Obtener los datos y calcular los estadísticos.<br>
-8. Determinar el estadístico de prueba ha caído en la región de rechazo o en la de no rechazo.<br>
-9. Determinar la decisión estadística.<br>
-10. Expresar la decisión estadística en términos del problema.<br>
+**Modelo Entidad-Realación:**
 
+El modelo entidad-relación, nos permite representar estos objetos de forma visual y ordenada, en el las entidades se representan con rectángulos, los atributos como elipses y las relaciones con líneas y rombos que grafican el tipo de relación.
 
-### Prueba de una hipótesis de investigación
-Considere un determinado modelo de automóvil en el que el rendimiento de la gasolina es 100 km por 10L. Un grupo de investigación elabora un nuevo sistema de inyección de combustible diseñado para dar un mejor rendimiento en km por litro de gasolina. Para evaluar el nuevo
-sistema se fabrican varios de éstos, se instalan en los automóviles y se someten a pruebas controladas de manejo. En este caso, el grupo de investigación busca evidencias para concluir que el nuevo sistema aumenta la media del rendimiento. La hipótesis de investigación es, entonces,
-que el nuevo sistema de inyección de combustible proporciona un rendimiento medio mayor a 100 km cada 10L de combustible; es decir, μ = 100. Como lineamiento general, una hipótesis de investigación se debe plantear como hipótesis alternativa. Por tanto, en este estudio las hipótesis nula y alternativa adecuadas son:<br>
+#### Ejemplo 
 
-H0: μ <= 100
-Ha: μ > 100
+Entidad: Alumno.<br>
+Atributos: Cédula de identidad, Nombre, Apellido, Fecha de Nacimiento, Fecha de Ingreso, Carrera, ect.<br>
+Relaciones: Un alumno “cursa” una cohorte.
 
-Si los resultados obtenidos con la muestra indican que no se puede rechazar H0, los investigadores no concluirán que el nuevo sistema de inyección de combustible sea mejor. Quizá será necesario continuar investigando y realizar nuevas pruebas. Pero si los resultados muestrales indican que se puede rechazar H0, los investigadores inferirán que Ha: μ > 100 es verdadera. Esta conclusión proporciona a los investigadores el apoyo estadístico necesario para afirmar que el nuevo sistema aumenta el rendimiento. Se considerará la producción del nuevo sistema.<br>
-En estudios de investigación como éste, las hipótesis nula y alternativa deben formularse de manera que al rechazar H0 se apoye la conclusión de la investigación. La hipótesis de la investigación, entonces, debe expresarse como hipótesis alternativa.
+Entidad: Cohorte.<br>
+Atributos: Número, Fecha de Inicio, Carrera, ect.<br>
+Relaciones: Una cohorte "pertene" a una carrera. Una cohorte "posee" alumnos.
 
-### Prueba de la validez de una afirmación
-Como ilustración de la prueba de la validez de una afirmación, considere una situación en la que un fabricante de refrescos asegura que los envases de dos litros de refresco contienen en promedio, por lo menos, 67.6 ml de líquido. Se selecciona una muestra de envases de dos litros y se mide su contenido para confirmar lo que asegura el fabricante. En este tipo de situaciones de prueba de hipótesis, se suele suponer que el dicho del fabricante es verdad a menos que las evidencias muestrales indiquen lo contrario. Si se sigue este método en el ejemplo de los refrescos, las hipótesis nula y alternativa se establecen como sigue.
+Entidad: Carrera.<br>
+Atributos: Nombre, Estado, ect.<br>
+Relaciones: Una carrera "tiene" cohortes.
 
-H0: μ >= 67.6
-Ha: μ < 67.6
+![Modelo E-R](../_src/assets/ER.PNG)
+<br>
+<br>
+Hemos desarrollado los conceptos más importantes de este modelo, pero aún nos falta entender como se rigen las relaciones entre las entidades.<br>
+Las relaciones aportan dos grandes características a una base datos, la no duplicidad y la integridad referencial. Se representan mediante dos elementos denominados "primary key" y "foreing key". Una primary key, es un atributo que representa de manera única e inequívoca a un elemento (registro) de la entidad, en el caso del alumno una primary key puede ser su N° de cédula de identidad o N° de Inscripción. Si se desea representar a ese mismo alumno en otra entidad como por ejemplo una cohorte, basta con incluir dentro de la tabla a la primary key como uno de sus campos, quedando representando ese alumno a través de su cédula de identidad/N° de Inscripción como una Foreing Key. Para resumir, una Foreing Key es generalemente una Primary Key en otra tabla.<br>
+Las relaciones a su vez pueden ser 1-1 (uno-uno), 1-M (uno-muchos), N-M (muchos-muchos)lo que se denomina como cardinalidad. En nuestro ejemplo, un alumno de Henry solo puede cursar en una cohorte, por lo que tenemos una relación de 1-1; esta restricción es generalmente impuesta por el modelo de negocios. En otros modelos de negocios como el de los cursos On-Demand, un alumno podría hacer varios cursos a la vez por lo que la relación sería de 1-M (claro que en ese caso no tendrías la solidez y acompañamiento de Henry 😊).
 
-Si los resultados muestrales indican que no se puede rechazar H0, entonces no se cuestiona lo que asegura el fabricante. Pero si los resultados muestrales indican que se puede rechazar H0, lo que se inferirá es que Ha: μ < 67.6 es verdad. Si tal es la conclusión, las evidencias estadísticas indican que el dicho del fabricante no es correcto. En toda situación en la que se desee probar la validez de una afirmación, la hipótesis nula se suele basar en la suposición de que la afirmación sea verdadera. Entonces, la hipótesis alternativa se formula de manera que rechazar H0 proporcione la evidencia estadística de que la suposición establecida es incorrecta.
+![Relaciones1](../_src/assets/relaciones.png)
 
-### Prueba en situaciones de toma de decisión
-En general, este tipo de situaciones se presentan cuando la persona que debe tomar una decisión tiene que elegir entre dos líneas de acción, una relacionada con la hipótesis nula y otra con la hipótesis alternativa. Por ejemplo, con base en una muestra de las piezas de un pedido recibido, el inspector de control de calidad tiene que decidir si acepta el pedido o si lo regresa al proveedor debido a que no satisface las especificaciones. Suponga que una especificación para unas piezas determinadas sea que su longitud media deba ser de dos pulgadas. Si la longitud media es menor o mayor a dos pulgadas, las piezas ocasionarán problemas de calidad en la operación de ensamblado. En este caso, las hipótesis nula y alternativa se formulan como sigue.
+![Relaciones2](../_src/assets/pk-fk.png)
 
-H0: μ = 2
-Ha: μ =! 2
+**Tipo de datos:**
 
-Si los resultados muestrales indican que no se puede rechazar H0, el inspector de control de calidad no tendrá razón para dudar que el pedido satisfaga las especificaciones y aceptará el pedido. Pero si los resultados muestrales indican que H0 se debe rechazar, se concluirá que las piezas no satisfacen las especificaciones. En este caso, el inspector de control de calidad tendrá evidencias suficientes para regresar el pedido al proveedor. Así, se ve que en este tipo de situaciones, se toman medidas en ambos casos, cuando H0 no se puede rechazar y cuando H0 se puede rechazar.
+Una base de datos puede guardar diferentes tipos de datos: caracteres, numéricos, fechas, texto, booleanos, decimales, etc. El nombre específico que se le da a un tipo de datos, varia en cada sistema de gestión de bases de datos. En SQL Server un dato true (1) o false(0) se denomina BIT, ese mismo tipo de dato en MySQL se denomina TINYINT. Al crear una tabla en una base de datos, es muy importante definir de manera adecuada que tipo de datos se guardará en cada campo.
 
-## Formas para las hipótesis nula y alternativa
-Las pruebas de hipótesis se refieren a dos parámetros poblacionales: la media poblacional y la proporción poblacional. A partir de la situación, las pruebas de hipótesis para un parámetro poblacional asumen una de estas tres formas: en dos se emplean desigualdades en la
-hipótesis nula y en la tercera se aplica una igualdad en la hipótesis nula. En las pruebas de hipótesis para la media poblacional, μ0 denota el valor hipotético y para la prueba de hipótesis hay que escoger una de las formas siguientes.
+[Tipos de datos en MySQL](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)
 
-Pruebas de una cola:<br> 
-H0: μ >= μ0
-Ha: μ < μ0
+[Tipos de datos en PostgreSQL](https://www.postgresql.org/docs/current/datatype.html)
 
-H0: μ <= μ0
-Ha: μ > μ0
+[Tipos de datos en SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver15)
 
-Prueba de dos colas.<br>
-H0: μ = μ0
-Ha: μ =! μ0
+### Introducción a SQL 
 
-## Errores tipo I y II
-Las hipótesis nula y alternativa son afirmaciones opuestas acerca de la población. Una de las dos, ya sea la hipótesis nula o la alternativa es verdadera, pero no ambas. Lo ideal es que la prueba de hipótesis lleve a la aceptación de H0 cuando H0 sea verdadera y al rechazo de H0 cuando Ha sea verdadera. Por desgracia, las conclusiones correctas no siempre son posibles. Como la prueba de hipótesis se basa en una información muestral debe tenerse en cuenta que existe la posibilidad de error.<br>
+SQL por sus siglas en inglés significa Lenguaje de Consulta Estructurada (Structured Query Language), es un lenguaje diseñado para interactuar con las bases de datos relacionales. SQL se subdivide a su vez entre distintos tipos de sublenguajes como DDL, DML, DCL  y TCL. Cada uno con sentencias características de esa subdivisión.
 
-![Prueba](/_src/assets/hipotesprueba.PNG)
+* DDL: Data Definition Language.
+* DML: Data Manipulation Language. 
+* DCL: Data Control Language.
+* TCL: Transacition Control Language.
+ 
+Todos los sistemas de gestión de bases de datos relacionales (RDMS) como MySQL, SQL Server, Oracle, o Postgres utilizan SQL como su lenguaje estándar. Suelen tener algunas pequeñas modificaciones entre herramientas por lo que se sugiere siempre verificar la documentación.
 
-### Error II
-Si se aceptara H0, es verdadera y a conclusión es correcta. Pero, si al aceptar lo anterior resultará que Ha es verdadera se comete un error tipo II; es decir, se acepta H0 cuando es falsa. 
-### Error I
-Si la conclusión es rechazar la H0, se considera a Ha verdadera. Si resultará que H0 es verdadera se comete un error tipo I; es decir, se rechaza H0 cuando es verdadera. Pero si Ha es verdadera, es correcto rechazar H0.
+**Data Definition Laguage:**
 
-En el ejemplo del autmóvil que recorre 100km con 10L de gasolina, el error tipo I de rechazar H0 cuando es verdadera corresponde a la afirmación de los investigadores de que el nuevo sistema mejora el rendimiento (μ > 100) cuando en realidad el nuevo sistema no es nada mejor que el actual. En cambio, el error tipo II de aceptar H0 cuando es falsa corresponde a la conclusión de los investigadores de que el nuevo sistema no es mejor que el actual (μ <= 100) cuando en realidad el nuevo sistema sí mejora el rendimiento.<br>
-En esta prueba de hipótesis del rendimiento, la hipótesis nula es H0: μ <= 100. Admita que la hipótesis nula es verdadera como una igualdad; es decir μ = 100. A la probabilidad de cometer un error tipo I cuando la hipótesis nula es verdadera como igualdad se le conoce como nivel de significancia. Por tanto en la prueba de hipótesis del rendimiento de combustible, el nivel de significancia es la probabilidad de rechazar H0: μ <= 100 cuando μ = 100. 
+Son sentencias que permiten definir la estructura de una base de datos, esta estructura esta compuesta por “objetos” (no confundir con POO en Python) que se desean gestionar. Los tipos de objetos que se pueden gestinar son: bases de datos, tablas, vistas o procedimientos. Las acciones que se pueden ejecutar son CREAR, MODIFICAR o ELIMINAR. <br>
+CREATE permite crear objetos en la base de datos, incluyendo la base de datos en si misma. 
 
-NIVEL DE SIGNIFICANCIA<br>
-El nivel de significancia es la probabilidad de cometer un error tipo I cuado la hipótesis nula es verdadera como igualdad.
+Crear base de datos
+```SQL
+CREATE DATABASE henry – Crear.
+ALTER DATABASE henry – Modificar.
+DROP DATABASE henry – Borrar.
+```
 
-Para denotar el nivel de significancia se usa la letra griega α (alfa), y los valores que se suelen usar para α son 0.05 y 0.01.
-En la práctica la persona responsable de la prueba de hipótesis especifica el nivel de significancia. Al elegir α se controla la probabilidad de cometer un error tipo I. A las aplicaciones de la prueba de hipótesis en que sólo se controla el error tipo I se les llama pruebas de significancia. Muchas aplicaciones de las pruebas de hipótesis son de este tipo.<br>
-No siempre sucede lo mismo con un error tipo II. Por tanto, si se decide aceptar H0 no es posible establecer la confianza en esa decisión. Debido a la incertidumbre de cometer un error tipo II al realizar una prueba de significancia los dedicados a la estadística suelen recomendar que se diga “no se rechaza H0” en lugar de “se acepta H0”. Decir “no se rechaza H0” implica la recomendación de reservarse tanto el juicio como la acción. Siempre que no se determine y controle la probabilidad de cometer un error tipo II, no se dirá “se acepta H0”. En esos casos sólo son posibles dos conclusiones: no se rechaza H0 o se rechaza H0.<br>
-Aunque controlar el error tipo II en una prueba de hipótesis es poco común, es posible.
-
-### Especificar el nivel de significación
-
-La distribución muestral del estadístico analizado, suele seguir una distribución estadística conocida, como la distribución normal estandarizada, la distribución t o la distribución chi cuadrado, éstas se utilizan como ayuda para determinar si la hipótesis nula es cierta.
-
-Existen dos tipos de errores: <br>
-- Error de tipo I: Es la probabilidad de que se rechace la hipótesis nula cuando es verdadera. Se conoce como nivel de significancia. <br>
-- Error de tipo II: Es la probabilidad de aceptar la hipótesis nula cuando es falsa. Se conoce como la potencia de la prueba.
-
-El error de tipo I que se llama también nivel de significación, determina el nivel de riesgo que se está dispuesto a tolerar en términos de rechazo de una hipótesis verdadera (imagina rechazar algo que en realidad era cierto,¡que problema!). La selección del nivel de Error I particular de riesgo, depende de la importancia (significación) del problema. En otras palabras, si se encuentra que los resultados observados en una muestra al azar difieren mar cadamente de aquellos que cabría esperar con la hipótesis y la variación propia del muestreo, se diría que las diferencias observadas son significativas y se estaría en condiciones de rechazar la hipótesis. Habitualmente se trabaja con niveles de significación del 1% y del 5%.
-
-![conclusion](/_src/assets/siginifica.PNG)
-
-### Determinar el tamaño de la muestra.<br>
-El tamaño de la muestra se determina al tomar en cuenta la importancia de Error I y Error II y al considerar las restricciones presupuestarias al efectuar el estudio. Generalmente las muestras grandes, permiten detectar incluso diferencias pequeñas entre los valores hipotéticos los parámetros poblacionales. Para un nivel de Error I dado, aumentar el tamaño de la muestra reducirá Error II y así se incrementará el poder de la prueba para detectar que la hipótesis nula es falsa. Sin embargo, esto implica un aumento de los costos del estudio, por lo que las restricciones presupuestarias afectarán el tamaño de la muestra que se tomará.<br>
-La fórmula para determinar el tamaño de muestra mínimo requerido para una prueba de
-hipótesis de la media, usando la distribución normal es:
-
-El valor z0 es el valor crítico de z que surge del nivel de significación especificado (Error I), mientras que z1 es el valor respecto de la probabilidad del error de tipo II asignada. El valor de la varianza debe conocerse o utilizar su estimador. Esta fórmula puede emplearse lo mismo para pruebas unilaterales que bilaterales. El único valor que difiere en estos dos tipos de pruebas es el valor de z0 utilizado.
-
-### Determinar el estadístico de prueba.<br>
-Una vez definidas las hipótesis nula y alternativa, y el tamaño de la muestra se puede establecer la distribución a utilizar: normal, t- student ó chi cuadrado.
-
-### Establecer los valores críticos que dividen las zonas de rechazo y de no rechazo.<br>
-Para poder establecer un método objetivo, que permita comparar los resultados muestrales con la hipótesis nula, el “nivel de significación”, se representa como un área (como toda probabilidad en una función de densidad), que se ubica a la derecha, a la izquierda o a ambos lados (en este caso, con la mitad de  en cada lado) según como se haya definido la Hipótesis alternativa. Esta probabilidad permite encontrar, en la tabla correspondiente (normal, t de Student o chi cuadrado), un valor de la variable (z, t ó ) denominado “valor crítico” simbolizado con zc (o eventualmente tc ó c), que divide al eje de las abscisas en dos zonas: la “zona de rechazo”, que se extiende por debajo de , y la “zona de no rechazo”, que se extiende a lo largo del resto del eje.
-
-### Obtener los datos y calcular los estadísticos.<br>
-Este paso está reservado a la efectiva realización de la investigación muestral. Es decir que en este momento es cuando se realiza el estudio tendiente a obtener los valores muestrales y calcular los estadísticos.
-
-### Determinar el estadístico de prueba ha caído en la región de rechazo o en la de no rechazo.<br>
-Se debe determinar la técnica a utilizar para determinar si el estadístico muestral ha caído en la región de rechazo o en la de no rechazo, es decir, el modo en que el estadístico de la muestra se va a comparar con el parámetro hipotético. El estadístico de prueba puede ser el estadístico muestral (el estimador insesgado del parámetro que se prueba) o una versión transformada de ese estadístico muestral.<br>
-La forma de verificar la validez del supuesto formulado, consiste en comparar el parámetro poblacional con el estadístico muestral:
-
-![resumen](/_src/assets/estadistico.PNG)
-
-El procedimiento para efectuar esta comparación, consiste en construir una variable estandarizada zi cuando n > 30, porque al estar trabajando con una muestra grande las estadísticas tienen Distribución Normal, en cuyo numerador aparece, precisamente, la diferencia entre media poblacional y media muestra , o entre varianza poblacional  y varianza muestral es decir:
-
-![resumen](/_src/assets/z.PNG)
-
-o en su defecto la variable t de Student ó chi cuadrado (si se tratara de n ≤ 30 y no conocemos el desvío estandar poblacional), haciendo:
-
-![resumen](/_src/assets/t.PNG)
-
-El valor del estadístico de prueba. se compara con el valor crítico en la distribución apropiada, para determinar si cae en la zona de rechazo o en la de no rechazo.
-
-### Determinar la decisión estadística.<br>
-
-Se determina la decisión de la prueba de hipótesis
-
-- si z1 > zc entonces z1 cae en la “zona de rechazo” y se considera que las diferencias entre z1 y zc son significativas entonces Rechazo la Hipótesis nula.
-
-- si z1 ≤ zc entonces z1 cae en la “zona de no rechazo” y se considera que las diferencias entre z1 y zc no son significativas entonces No Rechazo la Hipótesis nula.
-
-### Expresar la decisión estadística en términos del problema.<br>
-Una vez tomada la decisión, se deben expresar sus consecuencias en términos del problema particular.
+Tablas
+```SQL
+CREATE TABLE alumno (
+cedulaIdentidad INT NOT NULL AUTO_INCREMENT,
+nombre VARCHAR(20),
+apellido VARCHAR(20),
+fechaInicio DATE,
+PRIMARY KEY (cedulaIdentidad)
+)
 
 
-![resumen](/_src/assets/prueba2.PNG)
+ALTER TABLE alumno (
+direccion VARCHAR(20)
+)
+
+DROP TABLE alumno
+```
+
+Vistas
+```SQL
+CREATE VIEW datosAlumnos AS  
+SELECT *
+FROM alumnos
+
+ALTER VIEW datosAlumnos
+
+DROP VIEW datosAlumnos
+```
+
+Procedimientos
+```SQL
+CREATE PROCEDURE contarAlumnos (OUT param1 INT)
+     BEGIN
+       SELECT COUNT(*) INTO param1 FROM alumnos;
+     END
+
+ALTER PROCEDURE contarAlumnos (OUT param1 INT)
+     BEGIN
+       SELECT COUNT(*) INTO param1 FROM alumnos;
+     END
+
+DROP PROCEDURE contarAlumnos
+```
+### Introducción a bases de datos.
+
+Es una colección de datos almacenados de forma coherente y permanente; los cuales se pueden manipular, visualizar, registrar, actualizar o eliminar. Normalmente, una base de datos está controlada por un sistema de gestión de bases de datos (DBMS). En conjunto, los datos y el DBMS, junto con las aplicaciones asociadas a ellos, reciben el nombre de sistema de bases de datos, abreviado normalmente a simplemente base de datos.
+
+El principal objetivo de cualquier base de datos es almacenar información, pero existen otros objetivos relacionados que llevan a un desarrollados elegir una u otra.
+
+Estos objetivos están relacionados con: capacidad de respuesta, volumen de datos a almacenar, integración con otras tecnologías, etc.
+
+Las primeras bases de datos se basaron en el modelo relacional, evolucionando con el surgimiento de las redes sociales y otras aplicaciones a modelos no relacionales.
+
+**BD On-Premise o Cloud:**<br>
+Las bases de datos pueden estar alojadas de manera local (On-premise) o en la nube. También se pueden encontrar de forma “distribuida”.
+
+Las bases de datos On-Premise, se denominan de esta manera debido a que los servidores se encuentran físicamente alojados en instalaciones pertenecientes a la organización. Esto implica que tanto el crecimiento en capacidad y mantenimiento, están a la cargo de la organización; lo que convierte en un costo significativo. En Argentina esto es muy común en bancos, debido a que la normativa les exige adoptar esta opción.
+
+Cuando hablamos de bases de datos en la nube, se trata de servidores que pertenecen a terceros (AWS, Azure, GCP, etc.). En este caso tanto la capacidad como el mantenimiento esta a cargo de prestador, esto permite “pagar por lo que se usa” y escalar rápidamente. Instituciones como la CIA [utilizan el servicio de la nube privada de AWS.](https://wikileaks.org/amazon-atlas/)
+
+En el entorno empresarial actual de rápido crecimiento, las empresas necesitan tener acceso en tiempo real a sus datos para poder tomar decisiones a tiempo y aprovechar las nuevas oportunidades. Por lo que las startups optan por escalar gracias a estos servicios.
+
+Esto libera a los administradores de bases de datos de supervisar continuamente la base de datos por si surgen problemas y realizar un mantenimiento preventivo, así como aplicar parches y actualizaciones de software. 
+
+**Bases de datos relaciones vs Bases de datos no relaciones:**
+
+Los datos generalemente se suelen almacenar en estructuras de filas y columnas a través de una seria de tablas, esto permite para aumentar la eficacia del procesamiento y la consulta de datos. Así, se puede acceder, gestionar, modificar, actualizar, controlar y organizar fácilmente los datos. La mayoría de las bases de datos utilizan un lenguaje de consulta estructurada (SQL) para escribir y consultar datos. Estos tipos de bases de datos se denominan relacionales.
+
+Durante décadas, el modelo de datos predominante utilizado para el desarrollo de aplicaciones era el modelo de datos relacional empleado por Oracle, DB2, SQL Server, MySQL, PostgreSQL, etc. No fue sino hasta mediados y finales de la década del 2000 que otros modelos de datos comenzaron a adoptarse y aumentó su uso significativamente. Para diferenciar y categorizar estas nuevas clases de bases de datos y modelos de datos, se acuñó el término "NoSQL". Con frecuencia, los términos "NoSQL" y "no relacional" se usan indistintamente.
+
+El termino no relacional hace referencia a la no utilización del modelo relacional característico de las primeras bases de datos. Las bases de datos NoSQL pueden estar basadas en documentos, grafos, clave-valor u otras variantes. Algunas de las más conocidas son Cassandra, MongoDB, Firebase o DynamoDB.
+
+¿Cómo funciona una base de datos NoSQL (no relacionales)? <br>
+
+Estas bases de datos están optimizadas específicamente para aplicaciones que requieren grandes volúmenes de datos, baja latencia y modelos de datos flexibles, lo que se logra mediante la flexibilización de algunas de las restricciones de coherencia de datos en otras bases de datos.
+
+[Consideremos el ejemplo de modelado del esquema para una base de datos simple de libros:](https://aws.amazon.com/es/nosql/) 
+
+En una base de datos relacional, un registro de libros a menudo se enmascara (o "normaliza") y se almacena en tablas separadas, y las relaciones se definen mediante restricciones de claves primarias y externas. En este ejemplo, la tabla Libros tiene las columnas ISBN, Título del libro y Número de edición, la tabla Autores tiene las columnas IDAutor y Nombre de autor y, finalmente, la tabla Autor-ISBN tiene las columnas IDAutor e ISBN. El modelo relacional está diseñado para permitir que la base de datos aplique la integridad referencial entre tablas en la base de datos, normalizada para reducir la redundancia y, generalmente, está optimizada para el almacenamiento.
+
+En una base de datos NoSQL, el registro de un libro generalmente se almacena como un documento JSON. Para cada libro, el elemento, ISBN, Título del libro, Número de edición, Nombre autor y IDAutor se almacenan como atributos en un solo documento. En este modelo, los datos están optimizados para un desarrollo intuitivo y escalabilidad horizontal.
+Son BD orientadas y diseñadas para procesar consultas complejas. Además pueden correr grandes volúmenes de datos en un lapso menor de tiempo que las BD orientadas a transacciones.
+
+**Bases de datos transaccionales vs Bases de datos analíticas:**
+
+Las bases de datos de las grandes empresas de hoy en día soportan a menudo consultas muy complejas y se espera que proporcionen respuestas casi instantáneas a esas consultas. En consecuencia, se solicita a los administradores de bases de datos que empleen una amplia variedad de métodos para ayudar a mejorar el rendimiento. Algunos desafíos comunes a los que se enfrentan incluyen:
+1. Absorción de aumentos significativos en el volumen de datos. La explosión de datos provenientes de sensores, máquinas conectadas y docenas de otras fuentes hace que los administradores de bases de datos tengan que luchar para administrar y organizar los datos de sus empresas’ de manera eficiente.
+
+2. Garantía de seguridad de los datos. Actualmente, se producen filtraciones de datos en todas partes, y los piratas informáticos son cada vez más ingeniosos. Garantizar que los datos estén seguros es más importante que nunca, pero también que los usuarios puedan acceder a ellos fácilmente.
+
+Este tipo de requisitos llevan a seleccionar otros tipos de bases de datos dependiendo de si el objetivo es soportar la persistencia de datos de las aplicaciones o servir de soporte analítico a la toma de decisiones.<br>
+Lo anterior no implica que una base de datos transaccional no se puedan consultar con fines analíticos, pero claramente este no es su principal objetivo, ya que un crecimiento acelerado del volumen de datos entre otras cosas, podría afectar su rendimiento al realizar consultas analíticas complejas.
+
+Para abordar este tipo de problemas, se crearon herramientas tales como Datamarts, Datawarehouse o Datalake. Que permiten un repositorio centralizado de datos orientados a la analítica. Estos conceptos han evolucionado en la actualidad para converger en el concepto como el de Datamesh. Más adelante en módulo 3, exploraremos en detalle cada uno.
 
 
-![test](/_src/assets/pruebahip.PNG)
+## Rceursos adicionales
 
+* [Modelo entidad-relación](https://www.youtube.com/watch?v=Vu5x95UTD80)
 
-## Pruebas de hipótesis para la media poblacional.<br>
+* [Relaciones](https://www.youtube.com/watch?v=TKuxYHb-Hvc&t=209s)
 
-En el cálculo de las prubas de hipótesis, debemos estandarizar las variables a fin de poder estimar la zona en la cual se encuentra la prueba, esto se determina mediante la busqueda de los valores de z para el nivel de siginificancia en las tablas correspondientes (normal, t, chi cuadrado). Para un nivel del sigifincancia de 0.05 y una prueba de dos colas. el valor de z 
+* [Cardinalidad](https://www.youtube.com/watch?v=f5ZB05OWNCM)
 
-Cuando nos encontramos frente a una prueba de hipótesis del tipo: "H0: μ<= x" y "H1: μ> x" o "H0: μ>= x" y "H1: μ< x" , la denominamos prueba de una cola.
+* [Claves](https://www.youtube.com/watch?v=jshi9VCTm7g)
 
-![prueba2](/_src/assets/unacola.jpg)
+* [DDL](https://www.youtube.com/watch?v=sx4QE7u5ahI)
 
-Cuando nos encontramos frente a una prueba de hipótesis del tipo: "H0: μ= x" y "H1: μ!= 1x", la denominamos prueba de dos colas.
+* [SQL](https://www.youtube.com/watch?v=cWMCHbxMiMI)
 
-![prueba2](/_src/assets/doscolas.png)
-
-
-# IMPORTANTE
-Te recomendamos complementar este material con la lectura y ejercicios de las secciones 9.3 (pág. 345) y 9.4  (pág. 359) del Libro ["Estadística para administración y economía" - Capítulo 9](https://github.com/soyHenry/DS-M2/blob/main/Anderson.pdf).<br>
-Podrás verificar las soluciones en las pág. 1002 y 1003.
+* [DER - MySQL](https://www.youtube.com/watch?v=hfE0_Mme32k)
 
 ## Homework
 
-1. El gerente de Danvers-Hilton Resort afirma que la cantidad media que gastan los huéspedes en un fin de semana es de $600 o menos. Un miembro del equipo de contadores observó que en los últimos meses habían aumentado tales cantidades. El contador emplea una muestra de cuentas de fin de semana para probar la afirmación del gerente.
-  - a. ¿Qué forma de hipótesis deberá usar para probar la afirmación del gerente?.
-  - b. ¿Cuál es la conclusión apropiada cuando no se puede rechazar la hipótesis nula H0?
-  - c. ¿Cuál es la conclusión apropiada cuando se puede rechazar la hipótesis nula H0?
+Instalación MySQL y Wokrbench<br>
+MySQL Server: [Download](https://dev.mysql.com/downloads/mysql/)<br>
+MySQL Installer: [Download](https://dev.mysql.com/downloads/installer/)<br>
+Workbench: [Download](https://dev.mysql.com/downloads/workbench/)<br>
+MySQL: [Documentation](https://dev.mysql.com/doc/)
 
-2. El gerente de un negocio de venta de automóviles está pensando en un nuevo plan de bonificaciones, con objeto de incrementar el volumen de ventas. Al presente, el volumen medio de ventas es 14 automóviles por mes. El gerente desea realizar un estudio para ver si el plan de
-bonificaciones incrementa el volumen de ventas. Para recolectar los datos una muestra de vendedores venderá durante un mes bajo el nuevo plan de bonificaciones.
-  - a. Dé las hipótesis nula y alternativa más adecuadas para este estudio.
-  - b. Comente la conclusión resultante en el caso en que H0 no pueda rechazarse.
-  - c. Comente la conclusión que se obtendrá si H0 puede rechazarse.
+Crear un modelo relacional basado en el modelo de negocios de Henry:
 
-3. Nielsen informó que los hombres jóvenes estadounidenses ven diariamente 56.2 minutos de televisión en las horas de mayor audiencia (The Wall Street Journal Europe, 18 de noviembre de 2003). Un investigador cree que en Alemania, los hombres jóvenes ven más tiempo la televisión
-en las horas de mayor audiencia. Este investigador toma una muestra de hombres jóvenes alemanes y registra el tiempo que ven televisión en un día. Los resultados muestrales se usan para probar las siguientes hipótesis nula y alternativa.
-  - a. Dé las hipótesis nula y alternativa más adecuadas para este estudio.
-  - b. En esta situación, ¿cuál es el error tipo I? ¿Qué consecuencia tiene cometer este error?
-  - c. En esta situación, ¿cuál es el error tipo II? ¿Qué consecuencia tiene cometer este error?
+1. Identificar las relaciones.
+2. Identifcar primery key´s y foreing key´s.
+3. Definir los tipos de datos.
 
-4. En la etiqueta de una botella de jugo de naranja de 3 cuartos (de litro) dice que el jugo de naranja contiene en promedio 1 gramo o menos de grasa. Responda a las preguntas siguientes relacionadas con una prueba de hipótesis para probar lo que dice en la etiqueta.
-  - a. Dé las hipótesis nula y alternativa adecuadas.
-  - b. En esta situación, ¿cuál es el error tipo I? ¿Qué consecuencia tiene cometer este error?
-  - c. En esta situación, ¿cuál es el error tipo II? ¿Qué consecuencia tiene cometer este error?
+La entidades a modelar junto sus atributos son: <br>
+* Carrea: ID, Nombre.<br>
+* Cohorte: ID, Código, Carrera, Fecha de Inicio, Fecha de Finalización, Instructor.<br>
+* Instructores: ID, Cédula de identidad, Nombre, Apellido, Fecha de Nacimiento, Fecha de Incorporación.<br>
+* Alumnos: ID, Cédula de identidad, Nombre, Apellido, Fecha de Nacimiento, Fecha de Ingreso, Cohorte.<br>
+
+Crear en MySQL las tablas y relaciones del modelo definido.<br>
+Foreing Key en MySQL: [Download](https://www.w3schools.com/sql/sql_foreignkey.asp)
 
 
-## Ejercicios complementarios
-
-5. Un fabricante de neumáticos informa que el promedio de km que se puede recorrer con ellos es de 50.000km la desviación estandar es de 4.000 km. Usted decide comprar 80 neumáticos y decide corroborar la afirmación del fabricante. Si su medición da una media de 49.600km.<br>
-- Determine la hipótesis nula y alternativa.<br>
-- ¿Consedería correcto lo expresado por el fabricante para un nivel de significancia del 0.05?.<br>
-- ¿A partir de que valor de media muestral se ecuentra la zona de rechazo?
-- ¿Consedería correcto lo expresado por el fabricante para un nivel del 0.01?. <br>
-- ¿A partir de que valor de media muestral se ecuentra la zona de rechazo?
-
-6. Los alumnos de Henry, obtienen en promedio una puntuación de 78 en un HC con una desviación estándar de 15 puntos. Henry determina que a través de métodos innovadores puede aumentar esa media. Considerando la hipótesis de investigación de que el nuevo sistema proporciona un rendimiento medio mayor; es decir, μ > 78. El grupo de investigación tomo una muestra de 45 alumnos y obtiene notas promedio de 80 puntos.
-- Determine la hipótesis nula y alternativa.<br>
-- ¿Determine si el nuevo sistema realmente mejoro el rendimiento para un nivel de significancia del 0.05?.<br>
-- ¿A partir de que valor de media muestral se ecuentra la zona de rechazo?
-- ¿Determine si el nuevo sistema realmente mejoro el rendimiento para un nivel de significancia del 0.01?.<br>
-- ¿A partir de que valor de media muestral se ecuentra la zona de rechazo?
 
 <table class="hide" width="100%" style='table-layout:fixed;'>
   <tr>

@@ -1,224 +1,253 @@
 ![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)
 
-## Introducción a sistemas de gestión de bases de datos
+## Introducción a DML y ORM. Interacción con bases de datos.
 
-En este módulo aprenderás como es el proceso mediante el cual se generan las estructuras que forman parte de las bases de datos. Un dato es "una representación simbólica de un objeto o hecho de la realidad".
-Teniendo esto presente, resulta claro que para poder crear una base de datos, primero deberás representar en un modelo aquello que va a persistir en ella.
+En la clase anterior aprendimos como modelar un negocio para poder crear la estructura de una base de datos, siendo estas una de las fuentes de datos a consultar cuando sea necesario obtener información para la toma de decisiones.
 
-"Modelamos la realidad para poder describirla a través de los datos que la representan".
+SQL no solo permite interactuar con las bases de datos para crear sus objetos, sino que además nos permite escribir y recuperar datos. Esto es posible gracias al DML.
 
-### Modelos relacionales - Modelo Entidad - Relación
+**DML (INSERT, UPDATE, DROP, SELECT, WHERE):**
 
-**Modelos de negocios:**
+Son sentencias que permiten administrar la información de una base de datos a partir de las tablas que la conforman. Las acciones que se pueden ejecutar son INSERTAR, MODIFICAR, ELIMINAR y CONSULTAR.
 
-El modelado de datos es el proceso mediante el cual se definen los requisitos de negocio y se diseñan las mejores estructuras de datos para soportarlos.
-El modelo de datos es el equivalente al plano de un edificio, y representa de forma conceptual aquello que se pretende diseñar. Durante cada etapa de madurez de datos que atraviesa una empresa, pueden existir distintos modelos que describan la realidad del negocio. En este módulo en particular nos centraremos en los inicios de un proyecto de tecnología, en el cual se debe definir la estructura de la base de datos de una aplicación (como concepto amplio que incluye tanto apps móviles, web, ect.).
+Insertar Datos
 
-**Bases de datos:**
-
-Una base de datos “es una colección de datos almacenados de forma coherente y permanente”, estos datos provienen de entidades, objetos o hechos de la realidad, por lo que una de las primeras tareas al crear una base de datos tal como ya lo mencionamos, será definirlos y modelarlos.<br>
-Para poder modelar la realidad y traducirla en una estructura coherente, uno de los modelos más utilizados, es el modelo relacional, basado principalmente en el modelo ENTIDAD-RELACIÓN. La información necesaria para su construcción se basa en el relevamiento del modelo de negocios de la organización a través de entidades, atributos y relaciones.<br>
-La interacción de estas entidades en la realidad con los atributos que las describen, determinan las “relaciones” que se darán en la base de datos.
-Una entidad es un "objeto" de la realidad que se puede describir a través de sus "atributos", a su vez cada entidad interactúa con otras entidades, lo que se denomina "relación". Cabe destacar que tanto las entidades como sus relaciones se definen a partir del grado de relevancia que tienen para el negocio que se esta modelando, y de ellos surgen los registros que luego van a persistir en la base de datos.<br>
-Si pensamos en una Edtech, un "Alumno" es una entidad relevante que se puede describir mediante atributos tales como su nombre, apellido, fecha de nacimiento, fecha de ingreso, carrera que cursa, ect. Otra entidad importante es la del "Instructor" que también puede describirse por su nombre, apellido, fecha de nacimiento, fecha de incorporación, carrera que dicta, ect. Otros atributos tales como estatura, talle de calzado u otras, no serían importantes en este modelo.
-
-**Modelo Entidad-Realación:**
-
-El modelo entidad-relación, nos permite representar estos objetos de forma visual y ordenada, en el las entidades se representan con rectángulos, los atributos como elipses y las relaciones con líneas y rombos que grafican el tipo de relación.
-
-#### Ejemplo 
-
-Entidad: Alumno.<br>
-Atributos: Cédula de identidad, Nombre, Apellido, Fecha de Nacimiento, Fecha de Ingreso, Carrera, ect.<br>
-Relaciones: Un alumno “cursa” una cohorte.
-
-Entidad: Cohorte.<br>
-Atributos: Número, Fecha de Inicio, Carrera, ect.<br>
-Relaciones: Una cohorte "pertene" a una carrera. Una cohorte "posee" alumnos.
-
-Entidad: Carrera.<br>
-Atributos: Nombre, Estado, ect.<br>
-Relaciones: Una carrera "tiene" cohortes.
-
-![Modelo E-R](../_src/assets/ER.PNG)
-<br>
-<br>
-Hemos desarrollado los conceptos más importantes de este modelo, pero aún nos falta entender como se rigen las relaciones entre las entidades.<br>
-Las relaciones aportan dos grandes características a una base datos, la no duplicidad y la integridad referencial. Se representan mediante dos elementos denominados "primary key" y "foreing key". Una primary key, es un atributo que representa de manera única e inequívoca a un elemento (registro) de la entidad, en el caso del alumno una primary key puede ser su N° de cédula de identidad o N° de Inscripción. Si se desea representar a ese mismo alumno en otra entidad como por ejemplo una cohorte, basta con incluir dentro de la tabla a la primary key como uno de sus campos, quedando representando ese alumno a través de su cédula de identidad/N° de Inscripción como una Foreing Key. Para resumir, una Foreing Key es generalemente una Primary Key en otra tabla.<br>
-Las relaciones a su vez pueden ser 1-1 (uno-uno), 1-M (uno-muchos), N-M (muchos-muchos)lo que se denomina como cardinalidad. En nuestro ejemplo, un alumno de Henry solo puede cursar en una cohorte, por lo que tenemos una relación de 1-1; esta restricción es generalmente impuesta por el modelo de negocios. En otros modelos de negocios como el de los cursos On-Demand, un alumno podría hacer varios cursos a la vez por lo que la relación sería de 1-M (claro que en ese caso no tendrías la solidez y acompañamiento de Henry 😊).
-
-![Relaciones1](../_src/assets/relaciones.png)
-
-![Relaciones2](../_src/assets/pk-fk.png)
-
-**Tipo de datos:**
-
-Una base de datos puede guardar diferentes tipos de datos: caracteres, numéricos, fechas, texto, booleanos, decimales, etc. El nombre específico que se le da a un tipo de datos, varia en cada sistema de gestión de bases de datos. En SQL Server un dato true (1) o false(0) se denomina BIT, ese mismo tipo de dato en MySQL se denomina TINYINT. Al crear una tabla en una base de datos, es muy importante definir de manera adecuada que tipo de datos se guardará en cada campo.
-
-[Tipos de datos en MySQL](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)
-
-[Tipos de datos en PostgreSQL](https://www.postgresql.org/docs/current/datatype.html)
-
-[Tipos de datos en SQL Server](https://docs.microsoft.com/en-us/sql/t-sql/data-types/data-types-transact-sql?view=sql-server-ver15)
-
-### Introducción a SQL 
-
-SQL por sus siglas en inglés significa Lenguaje de Consulta Estructurada (Structured Query Language), es un lenguaje diseñado para interactuar con las bases de datos relacionales. SQL se subdivide a su vez entre distintos tipos de sublenguajes como DDL, DML, DCL  y TCL. Cada uno con sentencias características de esa subdivisión.
-
-* DDL: Data Definition Language.
-* DML: Data Manipulation Language. 
-* DCL: Data Control Language.
-* TCL: Transacition Control Language.
- 
-Todos los sistemas de gestión de bases de datos relacionales (RDMS) como MySQL, SQL Server, Oracle, o Postgres utilizan SQL como su lenguaje estándar. Suelen tener algunas pequeñas modificaciones entre herramientas por lo que se sugiere siempre verificar la documentación.
-
-**Data Definition Laguage:**
-
-Son sentencias que permiten definir la estructura de una base de datos, esta estructura esta compuesta por “objetos” (no confundir con POO en Python) que se desean gestionar. Los tipos de objetos que se pueden gestinar son: bases de datos, tablas, vistas o procedimientos. Las acciones que se pueden ejecutar son CREAR, MODIFICAR o ELIMINAR. <br>
-CREATE permite crear objetos en la base de datos, incluyendo la base de datos en si misma. 
-
-Crear base de datos
+El tipo de datos a ingresar en el campo siempre debe coincidir con el definido al momento de crear la tabla.<br>
+Opción 1: Se detallan en orden los campos y los registros a ingresar en cada uno ellos. Por cada sentencia INSERT INTO se puede declarar un VALUES. Es la opción menos eficiente para insertar datos en una tabla.
 ```SQL
-CREATE DATABASE henry – Crear.
-ALTER DATABASE henry – Modificar.
-DROP DATABASE henry – Borrar.
+INSERT INTO alumnos(nombre,apellido,fecha_nacimiento,ciudad,pais,cedulaIdentidad)
+VALUES('Maria ','Becerra','2000-4-1','Rosario',,'Argentina',38564122)
+```
+```SQL
+INSERT INTO alumnos(nombre,apellido,fecha_nacimiento,ciudad,pais,cedulaIdentidad)
+VALUES('El ','Duki','1998-9-8','Santa Fé','Colombia',39874156)
 ```
 
-Tablas
+Opción 2: Al igual que en la opción anterior, se detallan en orden los campos y los datos a ingresar en cada uno ellos. Solo se declara una sentencia INSERT INTO y luego se listan en VALUES cada uno de los registros separados por coma.
 ```SQL
-CREATE TABLE alumno (
-cedulaIdentidad INT NOT NULL AUTO_INCREMENT,
-nombre VARCHAR(20),
-apellido VARCHAR(20),
-fechaInicio DATE,
-PRIMARY KEY (cedulaIdentidad)
-)
-
-
-ALTER TABLE alumno (
-direccion VARCHAR(20)
-)
-
-DROP TABLE alumno
+INSERT INTO alumnos(nombre,apellido,fecha_nacimiento,ciudad,pais,cedulaIdentidad) 
+VALUES('Jeronimo','Gonzales','1988-8-9','Córdoba','Argentina',33687456),
+('Ricardo','Lorenzo','1975-2-10','La Paz','Bolivia',20856147),
+('Carlos','Principe','1985-6-11','Montevideo','Montevideo','Uruguay',25478369)
 ```
 
-Vistas
+Opción 3 : Se declara la sentencia INSERT INTO y el nombre de la tabla, luego se repite el VALUES de la opción 2. La diferencia con las anteriores es que se deben insertar datos para todos los campos que forman parte de la tabla.
+
 ```SQL
-CREATE VIEW datosAlumnos AS  
+INSERT INTO alumnos
+VALUES('Ernesto','Corvalan','1993-12-12','Caleta Olivia','Argentina',35879145),
+('Roberto','Carlos','1997-1-13','Cuidad de México','México',37854698),
+('Luis','Rodriguez','1976-3-14','Montevideo','Uruguay',20896369),
+('Hernan','Crespo','1999-9-15','Santiago de Chile','Chile',39546178)
+```
+
+Es importante aclarar que la inserción de datos no se da desde la interacción directa de un usuario con el gestor de la base de datos (PgAdmin o Workbench), sino que se hace a por medio del código en el cual se desarrolla una aplicación.
+
+En este ejemplo, puedes observar un script de PHP en donde se solicitan datos a un usuario mediante una aplicación:
+
+
+![PHP](/_src/assets/PHP.png)
+
+
+**Modificar Datos:**
+
+Las sentencias de inserción no pueden utilizarse para modificar datos. Ya que en ese caso, deberíamos obtener advertencias por parte del gestor debido a el ingreso de datos duplicados. En caso de tener que reemplazar el valor de un registro utilizaremos UPDATE. Para utilizar esta sentencia, deberemos utilizar además SET y WHERE.
+
+UPDATE <TABLA> - Especifica la tabla que vamos a modificar
+SET <CAMPO> = <VALOR> - Especifica el campo a modificar y el nuevo valor a guardar.
+WHERE <CAMPO> = <VALOR> - Declara una ruta de entrada al registro que vamos a modificar.
+
+Como se menciono en el punto anterior, este tipo de procesos corren principalmente sobre aplicaciones.
+
+Opción 1:
+```SQL
+UPDATE alumnos
+SET nombre = 'Carlos' 
+WHERE cedulaIdentidad = 35879145;
+```
+
+Opción 2:
+```SQL
+UPDATE alumnos
+SET nombre = 'Juan',ciudad='Santa Fé' 
+WHERE cedulaIdentidad = 33687456;
+```
+
+Será importante establecer cuidadosamente el campo a modificar, si no lo hacemos corremos el riesgo de modificar varios registros. Ese campo u otros pueden ser “filtrados” mediante la sentencia WHERE.
+
+**Eliminar Datos:**
+
+Cuando utilizamos DELETE, lo que se están borrando son registros y no datos de manera aislada. Si por ejemplo verificamos un error, no se debería eliminar el registro, sino realizar un UPDATE por el valor correcto.
+```SQL
+DELETE FROM alumnos WHERE idPerfil=1 
+
+DELETE FROM alumnos WHERE fechaInscripcion>'2021-01-08'
+```
+
+**Consultar Datos:**
+
+Para consultar los datos que se encuentran guardados en una tabla, se debe utilizar la sentencia SELECT, esta sentencia debe estar acompañada de manera obligatoria por FROM, se presentará en diversas variantes más adelante.<br>
+SELECT es una sentencia de proyección, donde puedes “solicitar” los campos a consultar. En FROM se debe especificar cual será la tabla a consultar.<br>
+Es muy común que a la hora de consultar, debas hacerlo según ciertas condiciones vinculadas a una problema de negocios, para poder incorporarlas a la lógica de la consulta, se utiliza la cláusula WHERE. Esta clausula además se acompañan por operadores que permiten establecer los criterios de segmentación.<br>
+Nuevamente para dejar en claro, la aplicación habitual de una consulta se da dentro de las aplicaciones y podemos verlas reflejadas en los informes. Mucha de la información que vemos en la interfaz de una aplicación, es el resultado de consultas a una base datos.
+
+**Operadores:**
+
+Aritméticos
+* " + " : Sumar.
+* " - " : Restar.
+* " * " : Multiplicar.
+* " / " : Dividir.
+
+```SQL
+SELECT nombreProducto, subtotal + impuestos AS Total
+FROM productos
+
+SELECT nombreColaborador, sueldo - retenciones AS SueldoNeto
+FROM staff
+
+SELECT nombreProducto, precio * cantidad AS Total
+FROM productos
+
+```
+Relacionales
+* " = " : Igual.
+* "!= ": Distinto.
+* " > ": Mayor que, se puede agregar = para obtener >= mayor o igual.
+* " < " : Menor que, se puede agregar = para obtener >= menor o igual.
+
+```SQL
+SELECT *
+FROM productos
+WHERE fechaVenta = '2022-03-28'
+
+SELECT *
+FROM productos
+WHERE fechaVenta != '2021-12-25'
+
+SELECT *
+FROM productos
+WHERE fechaVenta > '2021-12-31'
+
+SELECT *
+FROM productos
+WHERE fechaVenta < '2022-1-1'
+```
+
+Lógicos
+* NOT     : No. Se puede vincular con IN.
+* AND     : Y. 
+* OR      : O.
+* BETWEEN : Entre.
+* IN      : Define conjuntos.
+* LIKE    : Como. Para comparar textos.
+
+```SQL
 SELECT *
 FROM alumnos
+WHERE carrera IS NOT 'Full Stack' 
 
-ALTER VIEW datosAlumnos
+SELECT *
+FROM alumnos
+WHERE pais = 'Colombia' AND pais = 'Mexico'
 
-DROP VIEW datosAlumnos
+SELECT *
+FROM alumnos
+WHERE pais = 'Colombia' OR pais = 'Mexico'
+
+SELECT *
+FROM alumnos
+WHERE fechaIngreso = '2022-01-01' BETWEEN '2022-05-31'
+
+SELECT *
+FROM alumnos
+WHERE pais IN ('Colombia','Mexico')
+
+SELECT *
+FROM alumnos
+WHERE nombreModulo LIKE '%datos%'
 ```
 
-Procedimientos
-```SQL
-CREATE PROCEDURE contarAlumnos (OUT param1 INT)
-     BEGIN
-       SELECT COUNT(*) INTO param1 FROM alumnos;
-     END
+Haz visto como estos procesos pueden correr sobre aplicaciones o podemos realizarlos dentro del nuestro DBMS. En nuestro caso nos centraremos en la interacción como usuarios de un DBMS.
 
-ALTER PROCEDURE contarAlumnos (OUT param1 INT)
-     BEGIN
-       SELECT COUNT(*) INTO param1 FROM alumnos;
-     END
+**ORM . Conceptos:**
 
-DROP PROCEDURE contarAlumnos
+[SQLAlchemy - The Database Toolkit for](https://www.sqlalchemy.org/)
+
+Un ORM es un modelo de programación que permite interactuar con las estructuras de una base de datos relacional (SQL Server, MySQL, PostgreSQL, etc.), lo que ayuda a simplificar y acelerar el desarrollo de aplicaciones. Anteriormente habíamos mencionado que a través de las aplicaciones es como habitualmente se realizan los procesos de inserción, actualización, eliminación y consulta en una base de datos, el ORM permite a los desarrolladores simplificar esos procesos.<br>
+Esta interacción es posible gracias a que las estructuras de la base de datos relacional se vinculan con las entidades lógicas del ORM, de tal modo que las acciones CRUD (Create, Read, Update, Delete) a ejecutar sobre la base de datos física se realizan de forma indirecta por medio del ORM.
+Lo anterior permite al desarrollador no generar de manera manual el código SQL, debido a que los objetos o entidades de la base de datos serán manipulados mediante el leguaje de programación en el cual se este desarrollado (Python, javascript, PHP, ect.) a través de métodos desarrollados en el ORM.<br>
+¿Cuándo usar un ORM?
+Uno de los aspectos más importantes a evaluar para decidir utilizar un ORM es su rendimiento; a menor complejidad, menor rendimiento y viceversa. Si se opta por no utilizarlo en un proceso de desarrollo, el equipo deberá contar con bases sólidas en SQL.
+La utilización de un ORM además permite la reducción de código en la aplicación, pero la principal desventaja derivada del alto nivel de abstracción generado entre el modelo de entidades de nuestra aplicación y el RDBMS subyacente. Esto puede llevar a importantes deficiencias en el rendimiento de las aplicaciones.
+
+* Ejemplo para crear una tabla en ORM de Python.
+```python
+class Producto(db.Base):
+  __tablename__ = 'producto'
+    id = Column(Integer, primary_key=True)
+    nombre = Column(String, nullable=False)
+    precio = Column(Float)
+  def __init__(self, nombre, precio):
+    self.nombre = nombre
+    self.precio = precio
+  def __repr__(self):
+    return f'Producto({self.nombre}, {self.precio})'
+  def __str__(self):
+    return self.nombre
 ```
-### Introducción a bases de datos.
+* Ejemplo para agregar datos a una tabla en ORM de Python.
+```python
 
-Es una colección de datos almacenados de forma coherente y permanente; los cuales se pueden manipular, visualizar, registrar, actualizar o eliminar. Normalmente, una base de datos está controlada por un sistema de gestión de bases de datos (DBMS). En conjunto, los datos y el DBMS, junto con las aplicaciones asociadas a ellos, reciben el nombre de sistema de bases de datos, abreviado normalmente a simplemente base de datos.
+def run():
+arroz = Producto('Arroz', 1.25)
+db.session.add(arroz)
+print(arroz.id)
+agua = Producto('Agua', 0.3)
+db.session.add(agua)
+db.session.commit()
+print(arroz.id)
+consulta = db.session.query(Producto)
+ob = db.session.query(Producto).get(1)
+productos = db.session.query(Producto).all()
+num_productos = db.session.query(Producto).count()
+agua = db.session.query(Producto).filter_by(nombre='Agua').first()
+menos_de_1 = db.session.query(Producto).filter(Producto.precio < 1).all()
+```
+## Recursos adicionales
 
-El principal objetivo de cualquier base de datos es almacenar información, pero existen otros objetivos relacionados que llevan a un desarrollados elegir una u otra.
+* [W3 SQL](https://www.w3schools.com/sql/)
 
-Estos objetivos están relacionados con: capacidad de respuesta, volumen de datos a almacenar, integración con otras tecnologías, etc.
-
-Las primeras bases de datos se basaron en el modelo relacional, evolucionando con el surgimiento de las redes sociales y otras aplicaciones a modelos no relacionales.
-
-**BD On-Premise o Cloud:**<br>
-Las bases de datos pueden estar alojadas de manera local (On-premise) o en la nube. También se pueden encontrar de forma “distribuida”.
-
-Las bases de datos On-Premise, se denominan de esta manera debido a que los servidores se encuentran físicamente alojados en instalaciones pertenecientes a la organización. Esto implica que tanto el crecimiento en capacidad y mantenimiento, están a la cargo de la organización; lo que convierte en un costo significativo. En Argentina esto es muy común en bancos, debido a que la normativa les exige adoptar esta opción.
-
-Cuando hablamos de bases de datos en la nube, se trata de servidores que pertenecen a terceros (AWS, Azure, GCP, etc.). En este caso tanto la capacidad como el mantenimiento esta a cargo de prestador, esto permite “pagar por lo que se usa” y escalar rápidamente. Instituciones como la CIA [utilizan el servicio de la nube privada de AWS.](https://wikileaks.org/amazon-atlas/)
-
-En el entorno empresarial actual de rápido crecimiento, las empresas necesitan tener acceso en tiempo real a sus datos para poder tomar decisiones a tiempo y aprovechar las nuevas oportunidades. Por lo que las startups optan por escalar gracias a estos servicios.
-
-Esto libera a los administradores de bases de datos de supervisar continuamente la base de datos por si surgen problemas y realizar un mantenimiento preventivo, así como aplicar parches y actualizaciones de software. 
-
-**Bases de datos relaciones vs Bases de datos no relaciones:**
-
-Los datos generalemente se suelen almacenar en estructuras de filas y columnas a través de una seria de tablas, esto permite para aumentar la eficacia del procesamiento y la consulta de datos. Así, se puede acceder, gestionar, modificar, actualizar, controlar y organizar fácilmente los datos. La mayoría de las bases de datos utilizan un lenguaje de consulta estructurada (SQL) para escribir y consultar datos. Estos tipos de bases de datos se denominan relacionales.
-
-Durante décadas, el modelo de datos predominante utilizado para el desarrollo de aplicaciones era el modelo de datos relacional empleado por Oracle, DB2, SQL Server, MySQL, PostgreSQL, etc. No fue sino hasta mediados y finales de la década del 2000 que otros modelos de datos comenzaron a adoptarse y aumentó su uso significativamente. Para diferenciar y categorizar estas nuevas clases de bases de datos y modelos de datos, se acuñó el término "NoSQL". Con frecuencia, los términos "NoSQL" y "no relacional" se usan indistintamente.
-
-El termino no relacional hace referencia a la no utilización del modelo relacional característico de las primeras bases de datos. Las bases de datos NoSQL pueden estar basadas en documentos, grafos, clave-valor u otras variantes. Algunas de las más conocidas son Cassandra, MongoDB, Firebase o DynamoDB.
-
-¿Cómo funciona una base de datos NoSQL (no relacionales)? <br>
-
-Estas bases de datos están optimizadas específicamente para aplicaciones que requieren grandes volúmenes de datos, baja latencia y modelos de datos flexibles, lo que se logra mediante la flexibilización de algunas de las restricciones de coherencia de datos en otras bases de datos.
-
-[Consideremos el ejemplo de modelado del esquema para una base de datos simple de libros:](https://aws.amazon.com/es/nosql/) 
-
-En una base de datos relacional, un registro de libros a menudo se enmascara (o "normaliza") y se almacena en tablas separadas, y las relaciones se definen mediante restricciones de claves primarias y externas. En este ejemplo, la tabla Libros tiene las columnas ISBN, Título del libro y Número de edición, la tabla Autores tiene las columnas IDAutor y Nombre de autor y, finalmente, la tabla Autor-ISBN tiene las columnas IDAutor e ISBN. El modelo relacional está diseñado para permitir que la base de datos aplique la integridad referencial entre tablas en la base de datos, normalizada para reducir la redundancia y, generalmente, está optimizada para el almacenamiento.
-
-En una base de datos NoSQL, el registro de un libro generalmente se almacena como un documento JSON. Para cada libro, el elemento, ISBN, Título del libro, Número de edición, Nombre autor y IDAutor se almacenan como atributos en un solo documento. En este modelo, los datos están optimizados para un desarrollo intuitivo y escalabilidad horizontal.
-Son BD orientadas y diseñadas para procesar consultas complejas. Además pueden correr grandes volúmenes de datos en un lapso menor de tiempo que las BD orientadas a transacciones.
-
-**Bases de datos transaccionales vs Bases de datos analíticas:**
-
-Las bases de datos de las grandes empresas de hoy en día soportan a menudo consultas muy complejas y se espera que proporcionen respuestas casi instantáneas a esas consultas. En consecuencia, se solicita a los administradores de bases de datos que empleen una amplia variedad de métodos para ayudar a mejorar el rendimiento. Algunos desafíos comunes a los que se enfrentan incluyen:
-1. Absorción de aumentos significativos en el volumen de datos. La explosión de datos provenientes de sensores, máquinas conectadas y docenas de otras fuentes hace que los administradores de bases de datos tengan que luchar para administrar y organizar los datos de sus empresas’ de manera eficiente.
-
-2. Garantía de seguridad de los datos. Actualmente, se producen filtraciones de datos en todas partes, y los piratas informáticos son cada vez más ingeniosos. Garantizar que los datos estén seguros es más importante que nunca, pero también que los usuarios puedan acceder a ellos fácilmente.
-
-Este tipo de requisitos llevan a seleccionar otros tipos de bases de datos dependiendo de si el objetivo es soportar la persistencia de datos de las aplicaciones o servir de soporte analítico a la toma de decisiones.<br>
-Lo anterior no implica que una base de datos transaccional no se puedan consultar con fines analíticos, pero claramente este no es su principal objetivo, ya que un crecimiento acelerado del volumen de datos entre otras cosas, podría afectar su rendimiento al realizar consultas analíticas complejas.
-
-Para abordar este tipo de problemas, se crearon herramientas tales como Datamarts, Datawarehouse o Datalake. Que permiten un repositorio centralizado de datos orientados a la analítica. Estos conceptos han evolucionado en la actualidad para converger en el concepto como el de Datamesh. Más adelante en módulo 3, exploraremos en detalle cada uno.
-
-
-## Rceursos adicionales
-
-* [Modelo entidad-relación](https://www.youtube.com/watch?v=Vu5x95UTD80)
-
-* [Relaciones](https://www.youtube.com/watch?v=TKuxYHb-Hvc&t=209s)
-
-* [Cardinalidad](https://www.youtube.com/watch?v=f5ZB05OWNCM)
-
-* [Claves](https://www.youtube.com/watch?v=jshi9VCTm7g)
-
-* [DDL](https://www.youtube.com/watch?v=sx4QE7u5ahI)
-
-* [SQL](https://www.youtube.com/watch?v=cWMCHbxMiMI)
-
-* [DER - MySQL](https://www.youtube.com/watch?v=hfE0_Mme32k)
+* [SQL desde 0](http://deletesql.com/viewtopic.php?f=5&t=5&sid=67ee04e434bd9793ac2413325c095cb3)
 
 ## Homework
 
-Instalación MySQL y Wokrbench<br>
-MySQL Server: [Download](https://dev.mysql.com/downloads/mysql/)<br>
-MySQL Installer: [Download](https://dev.mysql.com/downloads/installer/)<br>
-Workbench: [Download](https://dev.mysql.com/downloads/workbench/)<br>
-MySQL: [Documentation](https://dev.mysql.com/doc/)
+1.	Inserte los [siguientes](https://github.com/soyHenry/DS-M2/blob/main/Clase%2002/Homework/registros_henry.sql) registros dentro de la base de datos creada en la clase anterior, corregir los errores que impidan la instrucción.<br>
+2.	No se sabe con certeza el lanzamiento de las cohortes N° 1245 y N° 1246, se solicita que las elimine de la tabla.<br>
+3.	Se ha decidido retrasar el comienzo de la cohorte N°1243, por lo que la nueva fecha de inicio será el 16/05. Se le solicita modificar la fecha de inicio de esos alumnos.<br>
+4.	El alumno N° 165 solicito el cambio de su Apellido por “Ramirez”. <br>
+5.	El área de Learning le solicita un listado de alumnos de la Cohorte N°1243 que incluya la fecha de ingreso.<br>
+6.	Como parte de un programa de actualización, el área de People le solicita un listado de los instructores que dictan la carrera de Full Stack Developer.<br>
+7. Se desea saber que alumnos formaron parte de la cohorte N° 1235. Elabore un listado.<br>
+8. Del listado anterior se desea saber quienes ingresaron en el año 2019.<br>
+9. La siguiente consulta permite acceder a datos de otras tablas y devolver un listado con la carrera a la cual pertenece cada alumno:
 
-Crear un modelo relacional basado en el modelo de negocios de Henry:
+```SQL
+/* En el M3 profudizaremos en el aprendizaje de SQL, pero aprovechemos lo que sabemos hasta aquí para entender como funcionan las relacionales. */
 
-1. Identificar las relaciones.
-2. Identifcar primery key´s y foreing key´s.
-3. Definir los tipos de datos.
-
-La entidades a modelar junto sus atributos son: <br>
-* Carrea: ID, Nombre.<br>
-* Cohorte: ID, Código, Carrera, Fecha de Inicio, Fecha de Finalización, Instructor.<br>
-* Instructores: ID, Cédula de identidad, Nombre, Apellido, Fecha de Nacimiento, Fecha de Incorporación.<br>
-* Alumnos: ID, Cédula de identidad, Nombre, Apellido, Fecha de Nacimiento, Fecha de Ingreso, Cohorte.<br>
-
-Crear en MySQL las tablas y relaciones del modelo definido.<br>
-Foreing Key en MySQL: [Download](https://www.w3schools.com/sql/sql_foreignkey.asp)
-
+SELECT alumnos.nombre, apellido, fechaNacimiento, carreras.nombre
+FROM alumnos
+INNER JOIN cohortes
+ON cohorte=idCohorte
+INNER JOIN carreras
+ON carrera = idCarrera
+```
+Coneste la siguientes interrogantes:
+  a. ¿Que campos permiten que se puedan acceder al nombre de la carrera?
+  b. ¿Que tipo de ralación existe entre el nombre la tabla cohortes y alumnos?
+  c. ¿Proponga dos opciones para filtrar el listado solo por los alumnos que pertenecen a 'Full Stack Developer', utilizando LIKE y NOT LIKE?, ¿Cual de las dos opciones es la manera correcta de hacerlo?, ¿Por que?
+  d. ¿Proponga dos opciones para filtrar el listado solo por los alumnos que pertenecen a 'Full Stack Developer', utilizando " = " y " != "?  ¿Cual de las dos opciones es la manera correcta de hacerlo?, ¿Por que?
+  e. ¿Como emplearía el filtrado utilizando el campo idCarrera?
 
 
 <table class="hide" width="100%" style='table-layout:fixed;'>
